@@ -120,10 +120,6 @@ set(EXAMPLES
 foreach(EXAMPLE ${EXAMPLES})
   add_executable(${EXAMPLE} WIN32 src/${EXAMPLE}/${EXAMPLE}.cpp)
   target_link_libraries(${EXAMPLE} ${COMMON_LIBS})
-  if(MSVC)
-configure_file(${PROJECT_SOURCE_DIR}/build/vs2010/VisualStudioUserFile.vcproj.user.in ${CMAKE_CURRENT_BINARY_DIR}/${EXAMPLE}.vcproj.user @ONLY)
-    configure_file(${PROJECT_SOURCE_DIR}/build/vs2010/VisualStudioUserFile.vcxproj.user.in ${CMAKE_CURRENT_BINARY_DIR}/${EXAMPLE}.vcxproj.user @ONLY)
-  endif(MSVC)
 endforeach(EXAMPLE)
 
 IF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
