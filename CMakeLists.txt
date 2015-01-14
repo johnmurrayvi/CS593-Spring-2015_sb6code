@@ -8,9 +8,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(WIN32)
-set(COMMON_LIBS sb6 optimized GLFW_r32 debug GLFW_d32)
-elseif (UNIX)
+if (UNIX)
 set(COMMON_LIBS sb6 glfw ${GLFW_LIBRARIES} GL rt dl)
 else()
 set(COMMON_LIBS sb6)
@@ -113,10 +111,6 @@ set(EXAMPLES
   tunnel
   wrapmodes
 )
-
-if (WIN32)
-  set(EXAMPLES ${EXAMPLES} win32raw)
-endif()
 
 #if(UNIX)
 #  add_executable(xraw src/xraw/xraw.c)
