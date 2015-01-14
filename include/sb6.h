@@ -26,42 +26,6 @@
 #ifndef __SB6_H__
 #define __SB6_H__
 
-#ifdef WIN32
-    #pragma once
-    #define _CRT_SECURE_NO_WARNINGS 1
-
-    #define WIN32_LEAN_AND_MEAN 1
-    #include <Windows.h>
-
-    #ifdef _DEBUG
-        #ifdef _WIN64
-            #pragma comment (lib, "GLFW_d64.lib")
-            #ifndef IN_SB6_LIB
-                #pragma comment (lib, "sb6_d64.lib")
-            #endif
-        #else
-            #pragma comment (lib, "GLFW_d32.lib")
-            #ifndef IN_SB6_LIB
-                #pragma comment (lib, "sb6_d32.lib")
-            #endif
-        #endif
-    #else
-        #ifdef _WIN64
-            #pragma comment (lib, "GLFW_r64.lib")
-            #ifndef IN_SB6_LIB
-                #pragma comment (lib, "sb6_r64.lib")
-            #endif
-        #else
-            #pragma comment (lib, "GLFW_r32.lib")
-            #ifndef IN_SB6_LIB
-                #pragma comment (lib, "sb6_r32.lib")
-            #endif
-        #endif
-    #endif
-
-    #pragma comment (lib, "OpenGL32.lib")
-#endif
-
 #include "GL/gl3w.h"
 
 #define GLFW_NO_GLU 1
@@ -242,10 +206,7 @@ public:
                                 GLsizei length,
                                 const GLchar* message)
     {
-#ifdef _WIN32
-        OutputDebugStringA(message);
-        OutputDebugStringA("\n");
-#endif /* _WIN32 */
+
     }
 
     static void getMousePosition(int& x, int& y)
@@ -325,20 +286,7 @@ protected:
 
 };
 
-#if defined _WIN32
-#define DECLARE_MAIN(a)                             \
-sb6::application *app = 0;                          \
-int CALLBACK WinMain(HINSTANCE hInstance,           \
-                     HINSTANCE hPrevInstance,       \
-                     LPSTR lpCmdLine,               \
-                     int nCmdShow)                  \
-{                                                   \
-    a *app = new a;                                 \
-    app->run(app);                                  \
-    delete app;                                     \
-    return 0;                                       \
-}
-#elif defined _LINUX || defined __APPLE__
+#if defined _LINUX || defined __APPLE__
 #define DECLARE_MAIN(a)                             \
 int main(int argc, const char ** argv)              \
 {                                                   \

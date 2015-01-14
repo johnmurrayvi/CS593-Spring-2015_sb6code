@@ -30,9 +30,6 @@
 #define SB6M_FOURCC(a,b,c,d)            ( ((unsigned int)(a) << 0) | ((unsigned int)(b) << 8) | ((unsigned int)(c) << 16) | ((unsigned int)(d) << 24) )
 #define SB6M_MAGIC                      SB6M_FOURCC('S','B','6','M')
 
-#ifdef _MSC_VER
-#pragma pack (push, 1)
-#endif
 
 typedef enum SB6M_CHUNK_TYPE_t
 {
@@ -120,8 +117,5 @@ typedef struct SB6M_CHUNK_COMMENT_t
     char                        comment[1];
 } SB6M_CHUNK_COMMENT;
 
-#ifdef _MSC_VER
-#pragma pack (pop)
-#endif
 
 #endif /* __SB6MFILE_H__ */

@@ -1,31 +1,6 @@
 #include <GL/gl3w.h>
 
-#ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN 1
-#include <windows.h>
-
-static HMODULE libgl;
-
-static void open_libgl(void)
-{
-	libgl = LoadLibraryA("opengl32.dll");
-}
-
-static void close_libgl(void)
-{
-	FreeLibrary(libgl);
-}
-
-static void *get_proc(const char *proc)
-{
-	void *res;
-
-	res = wglGetProcAddress(proc);
-	if (!res)
-		res = GetProcAddress(libgl, proc);
-	return res;
-}
-#elif defined(__APPLE__) || defined(__APPLE_CC__)
+#if defined(__APPLE__) || defined(__APPLE_CC__)
 #include <Carbon/Carbon.h>
 
 CFBundleRef bundle;
@@ -57,7 +32,9 @@ static void *get_proc(const char *proc)
 	CFRelease(procname);
 	return res;
 }
-#else
+
+#else // UNIX
+
 #include <dlfcn.h>
 #include <GL/glx.h>
 
